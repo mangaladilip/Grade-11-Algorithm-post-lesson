@@ -1,0 +1,196 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap');
+html,body{width:100%;margin:0;padding:0}
+*{box-sizing:border-box;font-family:'Outfit',sans-serif}
+.wrap{width:100%;padding:5% 6%}
+.counter{font-size:max(14px,1.6vw);color:#888;margin-bottom:2%}
+.prog{display:flex;gap:max(4px,0.6vw);margin-bottom:max(16px,2.4vw)}
+.pip{height:4px;flex:1;border-radius:2px;background:#ddd;transition:background 0.3s}
+.pip.done{background:#724b9e}
+.pip.cur{background:#9d78c4}
+.qtext{font-size:max(18px,2.2vw);font-weight:500;color:#1a1a1a;line-height:1.5;margin-bottom:4%}
+.opts{display:flex;flex-direction:column;gap:max(10px,1.4vw)}
+.opt{display:flex;align-items:center;gap:max(10px,1.4vw);padding:max(12px,1.6vw) max(14px,2vw);border:1.5px solid #ddd;border-radius:10px;cursor:pointer;background:#fff;transition:all 0.15s}
+.opt:hover{border-color:#9d78c4;background:#f7f4fc}
+.opt.sel{border-color:#724b9e;background:#f0ebf8}
+.opt.ok{border-color:#1D9E75;background:#E1F5EE;cursor:default}
+.opt.bad{border-color:#D85A30;background:#FAECE7;cursor:default}
+.opt.lock{cursor:default}
+.letter{width:max(28px,3vw);height:max(28px,3vw);border-radius:50%;background:#ede8f5;color:#724b9e;font-size:max(13px,1.5vw);font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.opt.ok .letter{background:#9FE1CB;color:#0F6E56}
+.opt.bad .letter{background:#F5C4B3;color:#993C1D}
+.opttext{font-size:max(16px,1.8vw);color:#1a1a1a;line-height:1.4}
+.fb{margin-top:max(12px,1.6vw);padding:max(10px,1.4vw) max(14px,1.8vw);border-radius:8px;font-size:max(15px,1.6vw);line-height:1.5;display:none;border-left:3px solid}
+.fb.show{display:block}
+.fb.ok{background:#E1F5EE;color:#0F6E56;border-color:#1D9E75}
+.fb.bad{background:#FAECE7;color:#993C1D;border-color:#D85A30}
+.btns{display:flex;gap:max(8px,1.2vw);margin-top:max(14px,2vw);flex-wrap:wrap}
+.btn{padding:max(10px,1.3vw) max(20px,3vw);border-radius:8px;font-size:max(15px,1.7vw);font-weight:500;cursor:pointer;border:1.5px solid #724b9e;transition:all 0.15s;white-space:nowrap}
+.btn-p{background:#724b9e;color:#fff}
+.btn-p:hover{background:#5a3a82}
+.btn-o{background:transparent;color:#724b9e}
+.btn-o:hover{background:#f0ebf8}
+.pg{display:none}
+.pg.on{display:block}
+.score{text-align:center;padding:6% 4%}
+.score-num{font-size:max(48px,6vw);font-weight:600;color:#724b9e;line-height:1}
+.score-lbl{font-size:max(18px,2.2vw);font-weight:500;color:#4a2d72;margin-top:max(8px,1.2vw)}
+.score-msg{font-size:max(15px,1.7vw);color:#666;margin-top:max(10px,1.5vw);line-height:1.6}
+</style>
+
+<div class="wrap">
+  <div class="prog" id="prog">
+    <div class="pip cur" id="pip0"></div>
+    <div class="pip" id="pip1"></div>
+    <div class="pip" id="pip2"></div>
+    <div class="pip" id="pip3"></div>
+    <div class="pip" id="pip4"></div>
+    <div class="pip" id="pip5"></div>
+  </div>
+
+  <div id="g1" class="pg on">
+    <div class="counter">Question 1 of 6</div>
+    <div class="qtext">Which of the following correctly describes the purpose of analysing the problem in the problem-solving process?</div>
+    <div class="opts" id="o1">
+      <div class="opt" onclick="pick(1,this,'A')"><div class="letter">A</div><div class="opttext">Writing the source code in a programming language</div></div>
+      <div class="opt" onclick="pick(1,this,'B')"><div class="letter">B</div><div class="opttext">Identifying the inputs, outputs, and processing required before developing a solution</div></div>
+      <div class="opt" onclick="pick(1,this,'C')"><div class="letter">C</div><div class="opttext">Running the program with different inputs to check for errors</div></div>
+      <div class="opt" onclick="pick(1,this,'D')"><div class="letter">D</div><div class="opttext">Breaking the problem into smaller sub-problems for different teams to solve</div></div>
+    </div>
+    <div class="fb" id="f1"></div>
+    <div class="btns"><button class="btn btn-p" id="c1" onclick="chk(1,'B','Correct. Analysing the problem involves identifying the inputs, outputs, and processing required before any algorithm or code is written.','The correct answer is B. Analysing the problem means identifying the inputs, outputs, and processing needed — not writing code, testing, or breaking down sub-problems.')">Check answer</button></div>
+  </div>
+
+  <div id="g2" class="pg">
+    <div class="counter">Question 2 of 6</div>
+    <div class="qtext">Which flowchart symbol is used to represent an input or output step?</div>
+    <div class="opts" id="o2">
+      <div class="opt" onclick="pick(2,this,'A')"><div class="letter">A</div><div class="opttext">Oval</div></div>
+      <div class="opt" onclick="pick(2,this,'B')"><div class="letter">B</div><div class="opttext">Rectangle</div></div>
+      <div class="opt" onclick="pick(2,this,'C')"><div class="letter">C</div><div class="opttext">Diamond</div></div>
+      <div class="opt" onclick="pick(2,this,'D')"><div class="letter">D</div><div class="opttext">Parallelogram</div></div>
+    </div>
+    <div class="fb" id="f2"></div>
+    <div class="btns"><button class="btn btn-p" id="c2" onclick="chk(2,'D','Correct. The parallelogram is the standard flowchart symbol used to represent input and output steps — also known as the data symbol.','The correct answer is D. The parallelogram represents input and output. The oval marks start and end, the rectangle represents a process, and the diamond represents a decision.')">Check answer</button></div>
+  </div>
+
+  <div id="g3" class="pg">
+    <div class="counter">Question 3 of 6</div>
+    <div class="qtext">What is pseudocode?</div>
+    <div class="opts" id="o3">
+      <div class="opt" onclick="pick(3,this,'A')"><div class="letter">A</div><div class="opttext">A programming language used to write executable programs</div></div>
+      <div class="opt" onclick="pick(3,this,'B')"><div class="letter">B</div><div class="opttext">A visual diagram using standardised symbols to represent an algorithm</div></div>
+      <div class="opt" onclick="pick(3,this,'C')"><div class="letter">C</div><div class="opttext">A non-formal, human-readable way of representing an algorithm before coding</div></div>
+      <div class="opt" onclick="pick(3,this,'D')"><div class="letter">D</div><div class="opttext">A method of testing a program to verify its correctness</div></div>
+    </div>
+    <div class="fb" id="f3"></div>
+    <div class="btns"><button class="btn btn-p" id="c3" onclick="chk(3,'C','Correct. Pseudocode is a non-formal, human-readable way of representing an algorithm. It cannot be executed directly by a computer and has no fixed standard.','The correct answer is C. Pseudocode is a non-formal, human-readable representation of an algorithm — not an executable language, not a visual diagram, and not a testing method.')">Check answer</button></div>
+  </div>
+
+  <div id="g4" class="pg">
+    <div class="counter">Question 4 of 6</div>
+    <div class="qtext">Which of the following is NOT a characteristic of a good algorithm?</div>
+    <div class="opts" id="o4">
+      <div class="opt" onclick="pick(4,this,'A')"><div class="letter">A</div><div class="opttext">Precise</div></div>
+      <div class="opt" onclick="pick(4,this,'B')"><div class="letter">B</div><div class="opttext">Finite</div></div>
+      <div class="opt" onclick="pick(4,this,'C')"><div class="letter">C</div><div class="opttext">Flexible</div></div>
+      <div class="opt" onclick="pick(4,this,'D')"><div class="letter">D</div><div class="opttext">Unique</div></div>
+    </div>
+    <div class="fb" id="f4"></div>
+    <div class="btns"><button class="btn btn-p" id="c4" onclick="chk(4,'C','Correct. Flexibility is not a characteristic of a good algorithm. The five characteristics are: precise, unique, finite, input, and output.','The correct answer is C. Flexibility is not a characteristic of a good algorithm. The five characteristics are: precise, unique, finite, input, and output.')">Check answer</button></div>
+  </div>
+
+  <div id="g5" class="pg">
+    <div class="counter">Question 5 of 6</div>
+    <div class="qtext">A programmer breaks down a school management system into student registration, attendance tracking, fee management, and report generation. Which problem-solving strategy is being applied?</div>
+    <div class="opts" id="o5">
+      <div class="opt" onclick="pick(5,this,'A')"><div class="letter">A</div><div class="opttext">Debugging</div></div>
+      <div class="opt" onclick="pick(5,this,'B')"><div class="letter">B</div><div class="opttext">Pseudocode</div></div>
+      <div class="opt" onclick="pick(5,this,'C')"><div class="letter">C</div><div class="opttext">Decomposition</div></div>
+      <div class="opt" onclick="pick(5,this,'D')"><div class="letter">D</div><div class="opttext">Iteration</div></div>
+    </div>
+    <div class="fb" id="f5"></div>
+    <div class="btns"><button class="btn btn-p" id="c5" onclick="chk(5,'C','Correct. Breaking a complex problem into smaller, independent sub-problems is called decomposition — the divide and conquer strategy.','The correct answer is C. Breaking a complex system into smaller, independent parts is decomposition.')">Check answer</button></div>
+  </div>
+
+  <div id="g6" class="pg">
+    <div class="counter">Question 6 of 6</div>
+    <div class="qtext">Which of the following best describes the flow of control called iteration?</div>
+    <div class="opts" id="o6">
+      <div class="opt" onclick="pick(6,this,'A')"><div class="letter">A</div><div class="opttext">All steps are executed one after another in a fixed order</div></div>
+      <div class="opt" onclick="pick(6,this,'B')"><div class="letter">B</div><div class="opttext">The algorithm makes a decision and takes one of two possible paths</div></div>
+      <div class="opt" onclick="pick(6,this,'C')"><div class="letter">C</div><div class="opttext">A set of steps is repeated a finite number of times based on a condition</div></div>
+      <div class="opt" onclick="pick(6,this,'D')"><div class="letter">D</div><div class="opttext">The algorithm identifies and removes errors from the program</div></div>
+    </div>
+    <div class="fb" id="f6"></div>
+    <div class="btns"><button class="btn btn-p" id="c6" onclick="chk(6,'C','Correct. Iteration refers to the repetition of a set of steps a finite number of times based on a condition — also known as a loop.','The correct answer is C. Iteration is the repetition of steps based on a condition. Option A describes sequence, option B describes selection, and option D describes debugging.')">Check answer</button></div>
+  </div>
+
+  <div id="gR" class="pg">
+    <div class="score">
+      <div class="score-num" id="snum">0/6</div>
+      <div class="score-lbl" id="slbl"></div>
+      <div class="score-msg" id="smsg"></div>
+      <div class="btns" style="justify-content:center;margin-top:max(20px,3vw)">
+        <button class="btn btn-o" onclick="reset()">↺ Try again</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var cur={},lk={},score=0,ans={1:'B',2:'D',3:'C',4:'C',5:'C',6:'C'};
+var cm={1:'Correct. Analysing the problem involves identifying the inputs, outputs, and processing required before any algorithm or code is written.',2:'Correct. The parallelogram is the standard flowchart symbol used to represent input and output steps — also known as the data symbol.',3:'Correct. Pseudocode is a non-formal, human-readable way of representing an algorithm. It cannot be executed directly by a computer and has no fixed standard.',4:'Correct. Flexibility is not a characteristic of a good algorithm. The five characteristics are: precise, unique, finite, input, and output.',5:'Correct. Breaking a complex problem into smaller, independent sub-problems is called decomposition — the divide and conquer strategy.',6:'Correct. Iteration refers to the repetition of a set of steps a finite number of times based on a condition — also known as a loop.'};
+var wm={1:'The correct answer is B. Analysing the problem means identifying the inputs, outputs, and processing needed.',2:'The correct answer is D. The parallelogram represents input and output. The oval marks start and end, the rectangle is a process, and the diamond is a decision.',3:'The correct answer is C. Pseudocode is a non-formal, human-readable representation of an algorithm.',4:'The correct answer is C. Flexibility is not a characteristic. The five are: precise, unique, finite, input, and output.',5:'The correct answer is C. Breaking a complex system into smaller, independent parts is decomposition.',6:'The correct answer is C. Iteration is the repetition of steps based on a condition. A describes sequence, B describes selection, D describes debugging.'};
+for(var i=1;i<=6;i++){cur[i]=null;lk[i]=0;}
+
+function pick(q,el,l){if(lk[q])return;cur[q]=l;document.querySelectorAll('#o'+q+' .opt').forEach(function(o){o.classList.remove('sel')});el.classList.add('sel');}
+
+function chk(q,a,c,w){
+  if(!cur[q])return;lk[q]=1;
+  var ls=['A','B','C','D'];
+  document.querySelectorAll('#o'+q+' .opt').forEach(function(o,i){o.classList.add('lock');if(ls[i]===a){o.classList.add('ok');o.querySelector('.letter').textContent='✓';}else if(ls[i]===cur[q]&&cur[q]!==a){o.classList.add('bad');}});
+  var f=document.getElementById('f'+q);f.className='fb show '+(cur[q]===a?'ok':'bad');f.textContent=cur[q]===a?c:w;
+  if(cur[q]===a)score++;
+  document.getElementById('c'+q).style.display='none';
+  updateProg(q);
+  setTimeout(function(){
+    document.getElementById('g'+q).classList.remove('on');
+    if(q<6){document.getElementById('g'+(q+1)).classList.add('on');}
+    else{showResult();}
+  },1800);
+}
+
+function updateProg(q){
+  for(var i=0;i<6;i++){
+    var p=document.getElementById('pip'+i);
+    if(i<q){p.className='pip done';}
+    else if(i===q){p.className='pip cur';}
+    else{p.className='pip';}
+  }
+}
+
+function showResult(){
+  document.getElementById('gR').classList.add('on');
+  document.getElementById('snum').textContent=score+'/6';
+  var lbls=['Needs more practice','Keep going','Getting there','Good effort','Almost there','Well done','Perfect'];
+  var msgs=['Review the lesson carefully before trying again.','Revisit the key sections and have another go.','Check the flowchart and pseudocode sections and retry.','Review decomposition and flow of control and try again.','Almost there — one more review and you will have it.','Strong work — review any incorrect answers before moving on.','Outstanding — all six concepts clearly understood.'];
+  document.getElementById('slbl').textContent=lbls[score];
+  document.getElementById('smsg').textContent=msgs[score];
+  for(var i=0;i<6;i++){document.getElementById('pip'+i).className='pip done';}
+}
+
+function reset(){
+  score=0;
+  for(var i=1;i<=6;i++){cur[i]=null;lk[i]=0;
+    document.querySelectorAll('#o'+i+' .opt').forEach(function(o,j){o.className='opt';o.querySelector('.letter').textContent=['A','B','C','D'][j];});
+    var f=document.getElementById('f'+i);f.className='fb';f.textContent='';
+    document.getElementById('c'+i).style.display='inline-block';
+    document.getElementById('g'+i).classList.remove('on');
+  }
+  document.getElementById('gR').classList.remove('on');
+  document.getElementById('g1').classList.add('on');
+  for(var i=0;i<6;i++){var p=document.getElementById('pip'+i);p.className=i===0?'pip cur':'pip';}
+}
+</script>
